@@ -1,0 +1,956 @@
+<title>ZNS</title>
+<meta name="description" content="株式会社ZNS - ホームページ制作・運用を手がけるITカンパニー">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f3f7fd;
+    --surface:#ffffff;
+    --surface-alt:#e9f1fb;
+    --border:#d6e3f3;
+    --text:#0b1b2f;
+    --text-muted:#54677f;
+    --primary:#0059ff;
+    --primary-dark:#0041c4;
+    --accent:#00c2ff;
+    --accent-soft:#dff7ff;
+    --success:#0fa968;
+    --danger:#e5484d;
+    --shadow: 0 20px 60px -20px rgba(0,60,180,0.25);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#04070f;
+      --surface:#0a1220;
+      --surface-alt:#0e1b2e;
+      --border:#16273f;
+      --text:#eaf2ff;
+      --text-muted:#8fa3bf;
+      --primary:#4a8fff;
+      --primary-dark:#2f6fe0;
+      --accent:#2fe4ff;
+      --accent-soft:#0b2734;
+      --shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#04070f;
+    --surface:#0a1220;
+    --surface-alt:#0e1b2e;
+    --border:#16273f;
+    --text:#eaf2ff;
+    --text-muted:#8fa3bf;
+    --primary:#4a8fff;
+    --primary-dark:#2f6fe0;
+    --accent:#2fe4ff;
+    --accent-soft:#0b2734;
+    --shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Noto Sans JP","Zen Kaku Gothic New",sans-serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:"Zen Kaku Gothic New","Noto Sans JP",sans-serif;
+    font-weight:900;
+    line-height:1.35;
+    text-wrap:balance;
+    margin:0;
+  }
+  .mono{
+    font-family:"Orbitron",sans-serif;
+  }
+  p{margin:0;}
+  a{color:inherit;}
+  img{max-width:100%;}
+  [hidden]{display:none!important;}
+  .wrap{
+    max-width:1160px;
+    margin:0 auto;
+    padding-inline:24px;
+  }
+  ::selection{ background:var(--accent); color:#001426; }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;
+    top:env(safe-area-inset-top,0px);
+    z-index:100;
+    background:color-mix(in srgb, var(--surface) 78%, transparent);
+    backdrop-filter:blur(14px) saturate(160%);
+    -webkit-backdrop-filter:blur(14px) saturate(160%);
+    border-bottom:1px solid var(--border);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding-block:14px;
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:"Orbitron",sans-serif;
+    font-weight:800;
+    font-size:1.35rem;
+    letter-spacing:0.06em;
+    cursor:pointer;
+    background:none;
+    border:none;
+    color:var(--text);
+    padding:0;
+  }
+  .logo-mark{
+    width:34px;height:34px;
+    border-radius:9px;
+    display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    color:#fff;
+    font-size:0.95rem;
+    box-shadow:0 6px 18px -6px color-mix(in srgb, var(--primary) 70%, transparent);
+    flex:none;
+  }
+  .navlinks{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    list-style:none;
+    margin:0;padding:0;
+  }
+  .navlinks button.link{
+    background:none;border:none;cursor:pointer;
+    font:inherit;
+    color:var(--text-muted);
+    font-weight:500;
+    font-size:0.94rem;
+    padding:9px 14px;
+    border-radius:99px;
+    transition:color .2s, background .2s;
+  }
+  .navlinks button.link:hover{ color:var(--text); background:var(--surface-alt); }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    border:none;
+    cursor:pointer;
+    font:inherit;
+    font-weight:700;
+    font-size:0.92rem;
+    padding:11px 22px;
+    border-radius:99px;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+    white-space:nowrap;
+  }
+  .btn:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    color:#fff;
+    box-shadow:0 10px 26px -10px color-mix(in srgb, var(--primary) 75%, transparent);
+  }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 16px 32px -10px color-mix(in srgb, var(--primary) 80%, transparent); }
+  .btn-ghost{
+    background:transparent;
+    border:1.5px solid var(--border);
+    color:var(--text);
+  }
+  .btn-ghost:hover{ border-color:var(--primary); color:var(--primary); }
+  .btn-block{ width:100%; justify-content:center; padding-block:14px; }
+  .menu-toggle{
+    display:none;
+    background:none;border:1.5px solid var(--border);border-radius:10px;
+    width:40px;height:40px;
+    color:var(--text);
+    cursor:pointer;
+    align-items:center;justify-content:center;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid var(--border);
+  }
+  .hero canvas{
+    position:absolute; inset:0;
+    width:100%;height:100%;
+    display:block;
+  }
+  .hero-fade{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, transparent 40%, var(--bg) 100%);
+    pointer-events:none;
+  }
+  .hero-inner{
+    position:relative;
+    padding-block:110px 90px;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:26px;
+  }
+  .eyebrow{
+    font-family:"Orbitron",sans-serif;
+    font-size:0.72rem;
+    letter-spacing:0.28em;
+    color:var(--primary);
+    background:var(--accent-soft);
+    border:1px solid color-mix(in srgb, var(--primary) 30%, transparent);
+    padding:8px 16px;
+    border-radius:99px;
+    text-transform:uppercase;
+  }
+  .hero h1{
+    font-size:clamp(2.1rem, 5.4vw, 3.6rem);
+    max-width:16ch;
+  }
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(120deg,var(--primary),var(--accent));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero-sub{
+    color:var(--text-muted);
+    font-size:1.05rem;
+    max-width:46ch;
+  }
+  .hero-cta{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+  .hero-stats{
+    display:flex;
+    gap:clamp(20px,5vw,56px);
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-top:20px;
+    padding-top:28px;
+    border-top:1px solid var(--border);
+    width:100%;
+    max-width:640px;
+  }
+  .hero-stats div{ text-align:center; }
+  .hero-stats .num{
+    font-family:"Orbitron",sans-serif;
+    font-weight:700;
+    font-size:1.6rem;
+    color:var(--primary);
+  }
+  .hero-stats .lbl{ font-size:0.8rem; color:var(--text-muted); }
+
+  /* ---------- Section generic ---------- */
+  section{ padding-block:88px; }
+  .section-head{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    max-width:640px;
+    margin-bottom:52px;
+  }
+  .section-head.center{ margin-inline:auto; text-align:center; align-items:center; }
+  .tag{
+    font-family:"Orbitron",sans-serif;
+    font-size:0.72rem;
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    color:var(--primary);
+    font-weight:700;
+  }
+  .section-head h2{ font-size:clamp(1.6rem,3.4vw,2.3rem); }
+  .section-head p{ color:var(--text-muted); }
+
+  /* ---------- Services ---------- */
+  .alt-bg{ background:var(--surface-alt); border-block:1px solid var(--border); }
+  .services{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:24px;
+  }
+  .service-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:36px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    box-shadow:var(--shadow);
+    position:relative;
+    overflow:hidden;
+  }
+  .service-card::before{
+    content:"";
+    position:absolute; inset:0 0 auto 0; height:3px;
+    background:linear-gradient(90deg,var(--primary),var(--accent));
+  }
+  .service-icon{
+    width:52px;height:52px;
+    border-radius:14px;
+    display:grid;place-items:center;
+    background:var(--accent-soft);
+    color:var(--primary);
+    flex:none;
+  }
+  .service-card h3{ font-size:1.3rem; }
+  .service-card p.desc{ color:var(--text-muted); font-size:0.95rem; }
+  .service-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .service-list li{
+    display:flex; gap:10px; align-items:flex-start;
+    font-size:0.92rem; color:var(--text);
+  }
+  .service-list svg{ flex:none; margin-top:3px; color:var(--primary); }
+
+  /* ---------- Process ---------- */
+  .process{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:28px 24px;
+  }
+  .step{ position:relative; padding-left:52px; }
+  .step .num{
+    position:absolute; left:0; top:0;
+    font-family:"Orbitron",sans-serif;
+    font-weight:700;
+    font-size:1.5rem;
+    color:var(--accent);
+    -webkit-text-stroke:1px var(--primary);
+  }
+  .step h4{ font-size:1.02rem; margin-bottom:6px; }
+  .step p{ color:var(--text-muted); font-size:0.9rem; }
+
+  /* ---------- About / stats ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:56px;
+    align-items:center;
+  }
+  .about-copy p{ color:var(--text-muted); margin-top:14px; }
+  .data-panel{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:8px;
+    box-shadow:var(--shadow);
+  }
+  .data-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 20px;
+    border-bottom:1px solid var(--border);
+    font-size:0.92rem;
+  }
+  .data-row:last-child{ border-bottom:none; }
+  .data-row .k{ color:var(--text-muted); }
+  .data-row .v{ font-family:"Orbitron",sans-serif; font-weight:700; color:var(--primary); font-variant-numeric:tabular-nums; }
+
+  /* ---------- CTA band ---------- */
+  .cta-band{
+    background:linear-gradient(120deg,var(--primary),var(--primary-dark) 60%, #001a4d);
+    color:#fff;
+    border-radius:26px;
+    padding:56px clamp(24px,5vw,64px);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    flex-wrap:wrap;
+    position:relative;
+    overflow:hidden;
+  }
+  .cta-band::after{
+    content:"";
+    position:absolute; right:-60px; top:-60px;
+    width:220px;height:220px;
+    background:radial-gradient(circle, color-mix(in srgb, var(--accent) 60%, transparent), transparent 70%);
+  }
+  .cta-band h3{ font-size:1.5rem; max-width:20ch; position:relative; }
+  .cta-band p{ color:rgba(255,255,255,0.78); margin-top:8px; position:relative; }
+  .cta-band .btn-primary{ background:#fff; color:var(--primary-dark); box-shadow:none; position:relative; }
+  .cta-band .btn-primary:hover{ transform:translateY(-2px); }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--border);
+    padding-block:44px;
+    margin-top:20px;
+  }
+  .foot-grid{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .foot-brand{ display:flex; flex-direction:column; gap:10px; max-width:280px; }
+  .foot-brand p{ color:var(--text-muted); font-size:0.86rem; }
+  .foot-cols{ display:flex; gap:56px; flex-wrap:wrap; }
+  .foot-col h5{ font-size:0.78rem; letter-spacing:0.1em; color:var(--text-muted); margin-bottom:12px; text-transform:uppercase; }
+  .foot-col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px; }
+  .foot-col button{
+    background:none;border:none;padding:0;cursor:pointer;font:inherit;color:var(--text-muted);
+  }
+  .foot-col button:hover{ color:var(--primary); }
+  .foot-bottom{
+    margin-top:36px; padding-top:20px; border-top:1px solid var(--border);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-size:0.8rem; color:var(--text-muted);
+  }
+
+  /* ---------- Contact page ---------- */
+  .contact-hero{
+    padding-block:64px 20px;
+    text-align:center;
+    display:flex; flex-direction:column; align-items:center; gap:14px;
+  }
+  .contact-hero h1{ font-size:clamp(1.8rem,4vw,2.5rem); }
+  .contact-hero p{ color:var(--text-muted); max-width:44ch; }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1.3fr;
+    gap:32px;
+    align-items:start;
+    padding-block:44px 100px;
+  }
+  .info-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:32px;
+    box-shadow:var(--shadow);
+    display:flex; flex-direction:column; gap:22px;
+  }
+  .info-item{ display:flex; gap:14px; align-items:flex-start; }
+  .info-item .ic{
+    width:40px;height:40px;border-radius:11px;
+    background:var(--accent-soft); color:var(--primary);
+    display:grid;place-items:center; flex:none;
+  }
+  .info-item h5{ font-size:0.85rem; color:var(--text-muted); font-weight:500; margin-bottom:2px; }
+  .info-item p{ font-size:0.96rem; }
+  .form-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:clamp(24px,4vw,44px);
+    box-shadow:var(--shadow);
+  }
+  .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .field{ display:flex; flex-direction:column; gap:8px; margin-bottom:20px; }
+  .field label{ font-size:0.88rem; font-weight:700; }
+  .field .req{ color:var(--danger); font-weight:500; font-size:0.78rem; margin-left:4px; }
+  .field input, .field select, .field textarea{
+    font:inherit;
+    background:var(--surface-alt);
+    border:1.5px solid var(--border);
+    border-radius:12px;
+    padding:12px 14px;
+    color:var(--text);
+    transition:border-color .16s, box-shadow .16s;
+    width:100%;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none;
+    border-color:var(--primary);
+    box-shadow:0 0 0 4px color-mix(in srgb, var(--primary) 16%, transparent);
+  }
+  .field textarea{ resize:vertical; min-height:130px; font-family:inherit; }
+  .field small.err{ color:var(--danger); font-size:0.8rem; display:none; }
+  .field.invalid input, .field.invalid select, .field.invalid textarea{ border-color:var(--danger); }
+  .field.invalid small.err{ display:block; }
+  .form-note{ font-size:0.8rem; color:var(--text-muted); margin-top:4px; }
+  .success-box{
+    display:none;
+    align-items:flex-start;
+    gap:14px;
+    background:color-mix(in srgb, var(--success) 12%, var(--surface));
+    border:1px solid color-mix(in srgb, var(--success) 40%, transparent);
+    border-radius:14px;
+    padding:18px 20px;
+    margin-bottom:22px;
+  }
+  .success-box.show{ display:flex; }
+  .success-box .ic{ color:var(--success); flex:none; margin-top:2px; }
+  .success-box h4{ font-size:0.98rem; margin-bottom:4px; }
+  .success-box p{ font-size:0.88rem; color:var(--text-muted); }
+
+  @media (max-width: 880px){
+    .menu-toggle{ display:inline-flex; }
+    .navlinks{
+      position:fixed; inset:64px 16px auto 16px;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:16px;
+      flex-direction:column;
+      align-items:stretch;
+      padding:10px;
+      box-shadow:var(--shadow);
+      display:none;
+    }
+    .navlinks.open{ display:flex; }
+    .navlinks button.link{ text-align:left; width:100%; }
+    .navlinks .btn{ margin-top:6px; }
+    .services{ grid-template-columns:1fr; }
+    .process{ grid-template-columns:1fr; }
+    .about-grid{ grid-template-columns:1fr; }
+    .contact-grid{ grid-template-columns:1fr; }
+    .field-row{ grid-template-columns:1fr; }
+    .cta-band{ flex-direction:column; text-align:center; justify-content:center; }
+  }
+</style>
+
+<header>
+  <div class="wrap nav">
+    <button class="logo" id="logoBtn" aria-label="ZNS ホームへ">
+      <span class="logo-mark">Z</span>ZNS
+    </button>
+    <nav>
+      <ul class="navlinks" id="navlinks">
+        <li><button class="link" data-scroll="services">事業内容</button></li>
+        <li><button class="link" data-scroll="process">制作フロー</button></li>
+        <li><button class="link" data-scroll="about">会社情報</button></li>
+        <li><button class="btn btn-primary" id="navContact">お問い合わせ</button></li>
+      </ul>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="メニュー" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="view-home">
+  <section class="hero">
+    <canvas id="net"></canvas>
+    <div class="hero-fade"></div>
+    <div class="wrap hero-inner">
+      <span class="eyebrow">IT SOLUTIONS COMPANY</span>
+      <h1>Webサイトの<em>「作る」</em>から<br><em>「育てる」</em>まで、次の一手を。</h1>
+      <p class="hero-sub">株式会社ZNSは、ホームページの制作から公開後の運用・改善までを一貫して支援するITカンパニーです。近未来の体験を、確かな技術で。</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary" id="heroContact">お問い合わせはこちら
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="btn btn-ghost" data-scroll="services">事業内容を見る</button>
+      </div>
+      <div class="hero-stats">
+        <div><div class="num mono">120<span>+</span></div><div class="lbl">制作実績</div></div>
+        <div><div class="num mono">99.9<span>%</span></div><div class="lbl">サーバー稼働率</div></div>
+        <div><div class="num mono">24/365</div><div class="lbl">運用サポート</div></div>
+        <div><div class="num mono">2021</div><div class="lbl">設立</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="tag">SERVICE</span>
+        <h2>事業内容</h2>
+        <p>ホームページの「制作」と「運用」、両輪でお客様のビジネス成長を支えます。</p>
+      </div>
+      <div class="services">
+        <article class="service-card">
+          <div class="service-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 9h18M8 21h8M12 18v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h3>ホームページ作成</h3>
+          <p class="desc">コーポレートサイトからランディングページ、ECサイトまで、目的に合わせた設計・デザイン・開発をワンストップで提供します。</p>
+          <ul class="service-list">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>コーポレートサイト・LP制作</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>レスポンシブ / スマホ対応</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>SEOを意識した構造設計</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>CMS導入・更新しやすい設計</li>
+          </ul>
+        </article>
+        <article class="service-card">
+          <div class="service-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>ホームページ運用</h3>
+          <p class="desc">公開して終わりにしない。サーバー管理からコンテンツ更新、セキュリティ対策まで、継続的な運用を代行・サポートします。</p>
+          <ul class="service-list">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>サーバー・ドメイン管理</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>コンテンツ更新・保守</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>セキュリティ監視・対策</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>アクセス解析・改善提案</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="alt-bg">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="tag">FLOW</span>
+        <h2>制作・運用の流れ</h2>
+        <p>ヒアリングから公開後の改善まで、6つのステップで伴走します。</p>
+      </div>
+      <div class="process">
+        <div class="step"><span class="num mono">01</span><h4>ヒアリング</h4><p>課題・目的・ターゲットを整理し、要件を明確にします。</p></div>
+        <div class="step"><span class="num mono">02</span><h4>設計・構成</h4><p>サイトマップとワイヤーフレームで情報設計を行います。</p></div>
+        <div class="step"><span class="num mono">03</span><h4>デザイン制作</h4><p>ブランドに合わせたビジュアルデザインを制作します。</p></div>
+        <div class="step"><span class="num mono">04</span><h4>開発・実装</h4><p>表示速度とセキュリティに配慮して実装します。</p></div>
+        <div class="step"><span class="num mono">05</span><h4>公開</h4><p>検証・テストを経て本番環境へ公開します。</p></div>
+        <div class="step"><span class="num mono">06</span><h4>運用・改善</h4><p>アクセス解析をもとに継続的に改善します。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="about-copy">
+        <span class="tag">ABOUT</span>
+        <h2 style="margin-top:10px;">確かな技術と伴走力で、<br>Webの「その先」へ。</h2>
+        <p>株式会社ZNSは、中小企業からスタートアップまで、幅広いお客様のホームページ制作・運用を支援してきました。作って終わりではなく、公開後も伴走し続けることを大切にしています。</p>
+        <p>近未来的な体験と堅実な運用、その両方を一つのチームで実現します。</p>
+      </div>
+      <div class="data-panel">
+        <div class="data-row"><span class="k">会社名</span><span class="v" style="font-family:inherit;font-weight:700;color:var(--text);">株式会社ZNS</span></div>
+        <div class="data-row"><span class="k">設立</span><span class="v">2021</span></div>
+        <div class="data-row"><span class="k">事業内容</span><span class="v" style="font-family:inherit;font-weight:700;color:var(--text);">HP制作・運用</span></div>
+        <div class="data-row"><span class="k">制作実績</span><span class="v">120+</span></div>
+        <div class="data-row"><span class="k">サーバー稼働率</span><span class="v">99.9%</span></div>
+        <div class="data-row"><span class="k">サポート体制</span><span class="v">24/365</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cta-band">
+        <div>
+          <h3>まずはお気軽にご相談ください。</h3>
+          <p>ホームページの新規制作、リニューアル、運用代行など、どんなご相談もお待ちしております。</p>
+        </div>
+        <button class="btn btn-primary" id="ctaContact">お問い合わせフォームへ</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<main id="view-contact" hidden>
+  <div class="wrap contact-hero">
+    <span class="eyebrow">CONTACT</span>
+    <h1>お問い合わせ</h1>
+    <p>ホームページの制作・運用に関するご相談、お見積りなど、下記フォームまたはメール・お電話にてお気軽にご連絡ください。</p>
+  </div>
+  <div class="wrap contact-grid">
+    <div class="info-card">
+      <div class="info-item">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 8l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div><h5>メール</h5><p>info@zns-corp.example.jp</p></div>
+      </div>
+      <div class="info-item">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.1-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.4 2.1L8 9.9a16 16 0 006 6l1.4-1.4a2 2 0 012.1-.4c.9.3 1.8.5 2.7.6a2 2 0 011.7 2.2z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div><h5>電話</h5><p>03-0000-0000（平日 9:00-18:00）</p></div>
+      </div>
+      <div class="info-item">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-5.2-7-11a7 7 0 0114 0c0 5.8-7 11-7 11z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.7"/></svg></div>
+        <div><h5>所在地</h5><p>東京都渋谷区（詳細住所はご連絡時にご案内します）</p></div>
+      </div>
+      <div class="info-item">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div><h5>営業時間</h5><p>平日 9:00〜18:00（土日祝休）</p></div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="success-box" id="successBox">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <h4>お問い合わせありがとうございます</h4>
+          <p>内容を確認のうえ、担当者より2営業日以内にご連絡いたします。メールソフトが開かない場合は、上記メールアドレス宛に直接ご連絡ください。</p>
+        </div>
+      </div>
+      <form id="contactForm" novalidate>
+        <div class="field-row">
+          <div class="field" id="f-name">
+            <label for="name">お名前<span class="req">必須</span></label>
+            <input type="text" id="name" name="name" autocomplete="name" placeholder="山田 太郎">
+            <small class="err">お名前を入力してください。</small>
+          </div>
+          <div class="field" id="f-company">
+            <label for="company">会社名</label>
+            <input type="text" id="company" name="company" autocomplete="organization" placeholder="株式会社サンプル">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field" id="f-email">
+            <label for="email">メールアドレス<span class="req">必須</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="taro@example.com">
+            <small class="err">正しいメールアドレスを入力してください。</small>
+          </div>
+          <div class="field" id="f-tel">
+            <label for="tel">電話番号</label>
+            <input type="tel" id="tel" name="tel" autocomplete="tel" placeholder="03-0000-0000">
+          </div>
+        </div>
+        <div class="field" id="f-type">
+          <label for="type">お問い合わせ種別<span class="req">必須</span></label>
+          <select id="type" name="type">
+            <option value="">選択してください</option>
+            <option value="新規制作のご相談">新規制作のご相談</option>
+            <option value="リニューアルのご相談">リニューアルのご相談</option>
+            <option value="運用・保守について">運用・保守について</option>
+            <option value="お見積り依頼">お見積り依頼</option>
+            <option value="その他">その他</option>
+          </select>
+          <small class="err">お問い合わせ種別を選択してください。</small>
+        </div>
+        <div class="field" id="f-message">
+          <label for="message">お問い合わせ内容<span class="req">必須</span></label>
+          <textarea id="message" name="message" placeholder="ご相談内容やご質問をご記入ください。"></textarea>
+          <small class="err">お問い合わせ内容を入力してください。</small>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">送信する</button>
+        <p class="form-note">送信すると、ご入力内容を記載したメールがお使いのメールソフトで作成されます。内容をご確認のうえ送信してください。</p>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo" style="cursor:default;"><span class="logo-mark">Z</span>ZNS</div>
+        <p>ホームページの制作・運用を通じて、お客様のビジネスの成長を支えるITカンパニーです。</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h5>事業内容</h5>
+          <ul>
+            <li><button data-scroll="services">ホームページ作成</button></li>
+            <li><button data-scroll="services">ホームページ運用</button></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h5>会社</h5>
+          <ul>
+            <li><button data-scroll="about">会社情報</button></li>
+            <li><button data-scroll="process">制作フロー</button></li>
+            <li><button id="footContact">お問い合わせ</button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 ZNS Corporation.</span>
+      <span class="mono">ZNS / IT SOLUTIONS</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var homeView = document.getElementById('view-home');
+  var contactView = document.getElementById('view-contact');
+  var navlinks = document.getElementById('navlinks');
+  var menuToggle = document.getElementById('menuToggle');
+
+  function closeMenu(){
+    navlinks.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded','false');
+  }
+
+  function showHome(scrollTarget){
+    contactView.hidden = true;
+    homeView.hidden = false;
+    document.title = 'ZNS | ホームページ制作・運用のITカンパニー';
+    closeMenu();
+    if(scrollTarget){
+      requestAnimationFrame(function(){
+        var el = document.getElementById(scrollTarget);
+        if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    } else {
+      window.scrollTo({top:0, behavior:'auto'});
+    }
+    history.replaceState(null,'','#home');
+  }
+
+  function showContact(){
+    homeView.hidden = true;
+    contactView.hidden = false;
+    document.title = 'お問い合わせ | ZNS';
+    closeMenu();
+    window.scrollTo({top:0, behavior:'auto'});
+    history.replaceState(null,'','#contact');
+  }
+
+  document.getElementById('logoBtn').addEventListener('click', function(){ showHome(); });
+  document.getElementById('navContact').addEventListener('click', showContact);
+  document.getElementById('heroContact').addEventListener('click', showContact);
+  document.getElementById('ctaContact').addEventListener('click', showContact);
+  document.getElementById('footContact').addEventListener('click', showContact);
+
+  document.querySelectorAll('[data-scroll]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var target = btn.getAttribute('data-scroll');
+      if(homeView.hidden){ showHome(target); }
+      else {
+        closeMenu();
+        var el = document.getElementById(target);
+        if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  });
+
+  menuToggle.addEventListener('click', function(){
+    var open = navlinks.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  if(location.hash === '#contact'){ showContact(); }
+
+  /* ---- Contact form validation + mailto submit ---- */
+  var form = document.getElementById('contactForm');
+  var successBox = document.getElementById('successBox');
+  var fields = {
+    name: {el:'f-name', validate: function(v){ return v.trim().length > 0; }},
+    email: {el:'f-email', validate: function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }},
+    type: {el:'f-type', validate: function(v){ return v.trim().length > 0; }},
+    message: {el:'f-message', validate: function(v){ return v.trim().length > 0; }}
+  };
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var data = new FormData(form);
+    var valid = true;
+    Object.keys(fields).forEach(function(key){
+      var cfg = fields[key];
+      var value = data.get(key) || '';
+      var wrap = document.getElementById(cfg.el);
+      if(!cfg.validate(value)){
+        wrap.classList.add('invalid');
+        valid = false;
+      } else {
+        wrap.classList.remove('invalid');
+      }
+    });
+    if(!valid){
+      successBox.classList.remove('show');
+      return;
+    }
+
+    var body = [
+      'お名前: ' + data.get('name'),
+      '会社名: ' + (data.get('company') || '（未入力）'),
+      'メールアドレス: ' + data.get('email'),
+      '電話番号: ' + (data.get('tel') || '（未入力）'),
+      'お問い合わせ種別: ' + data.get('type'),
+      '',
+      'お問い合わせ内容:',
+      data.get('message')
+    ].join('\n');
+
+    var mailto = 'mailto:info@zns-corp.example.jp'
+      + '?subject=' + encodeURIComponent('【ZNSサイト】お問い合わせ: ' + data.get('type'))
+      + '&body=' + encodeURIComponent(body);
+
+    window.location.href = mailto;
+    successBox.classList.add('show');
+    successBox.scrollIntoView({behavior:'smooth', block:'start'});
+    form.reset();
+  });
+
+  Object.keys(fields).forEach(function(key){
+    var input = form.elements[key];
+    if(input){
+      input.addEventListener('input', function(){
+        document.getElementById(fields[key].el).classList.remove('invalid');
+      });
+    }
+  });
+
+  /* ---- Hero network animation ---- */
+  var canvas = document.getElementById('net');
+  var ctx = canvas.getContext('2d');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var nodes = [];
+  var W, H, raf;
+
+  function primaryColor(){
+    return getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#0059ff';
+  }
+  function accentColor(){
+    return getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#00c2ff';
+  }
+
+  function resize(){
+    var rect = canvas.parentElement.getBoundingClientRect();
+    W = rect.width; H = rect.height;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    canvas.style.width = W+'px'; canvas.style.height = H+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    var count = Math.max(24, Math.min(70, Math.floor(W*H/16000)));
+    nodes = [];
+    for(var i=0;i<count;i++){
+      nodes.push({
+        x: Math.random()*W, y: Math.random()*H,
+        vx: (Math.random()-0.5)*0.35, vy: (Math.random()-0.5)*0.35
+      });
+    }
+  }
+
+  function tick(){
+    ctx.clearRect(0,0,W,H);
+    var pc = primaryColor(), ac = accentColor();
+    for(var i=0;i<nodes.length;i++){
+      var n = nodes[i];
+      n.x += n.vx; n.y += n.vy;
+      if(n.x<0||n.x>W) n.vx*=-1;
+      if(n.y<0||n.y>H) n.vy*=-1;
+    }
+    for(var i=0;i<nodes.length;i++){
+      for(var j=i+1;j<nodes.length;j++){
+        var a=nodes[i], b=nodes[j];
+        var dx=a.x-b.x, dy=a.y-b.y;
+        var dist = Math.sqrt(dx*dx+dy*dy);
+        if(dist < 150){
+          ctx.strokeStyle = pc;
+          ctx.globalAlpha = (1 - dist/150) * 0.35;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+          ctx.stroke();
+        }
+      }
+    }
+    ctx.globalAlpha = 0.9;
+    for(var i=0;i<nodes.length;i++){
+      ctx.fillStyle = i%3===0 ? ac : pc;
+      ctx.beginPath();
+      ctx.arc(nodes[i].x, nodes[i].y, 1.8, 0, Math.PI*2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    raf = requestAnimationFrame(tick);
+  }
+
+  resize();
+  if(reduceMotion){
+    tick(); cancelAnimationFrame(raf);
+  } else {
+    tick();
+  }
+  window.addEventListener('resize', function(){
+    resize();
+  });
+})();
+</script>
